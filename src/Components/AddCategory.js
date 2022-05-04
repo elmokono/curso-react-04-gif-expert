@@ -8,13 +8,15 @@ export const AddCategory = ({ setCategories }) => {
     //change text
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
+        console.log('- handleInputChange');
     }
 
     //callback parent component
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('- handleSubmit', inputValue);
 
-        if (inputValue.trim() === '')
+        if (inputValue.trim().length < 3)
             return;
 
         setCategories(x => [inputValue.trim(), ...x]);
@@ -23,6 +25,7 @@ export const AddCategory = ({ setCategories }) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <p>{inputValue}</p>
             <input placeholder='Input Category Name' type="text" value={inputValue} onChange={handleInputChange}></input>
         </form>
     )
